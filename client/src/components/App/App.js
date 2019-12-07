@@ -5,7 +5,8 @@ import {
     weatherFetchDataByName,
     weatherFetchDataByCoordinates,
     fetchFavoriteCity,
-    deleteFavoriteCity} from "../../actions/index"
+    deleteFavoriteCity,
+    personsFetchData} from "../../actions/index"
 
 import {getCoordinates} from "../../utils/getCoordinates.js";
 import {saveToLocalStorage} from "../../utils/saveToLocalStorage";
@@ -20,19 +21,19 @@ const App = (props) => {
     const [isLoading, setIsLoading] = useState(true);
 
     const {
-        apiKey, defaultWeather, favoritesCities,
+        apiKey, favoritesCities,
         deleteFavoriteCity, fetchByCityName,
-        fetchByCoordinates, fetchFavoriteCityByName
+        fetchByCoordinates, fetchFavoriteCityByName, fetchData
     } = props;
 
     const getDefaultWeather = async () => {
-        fetchByCityName(apiKey, defaultWeather);
+        fetchByCityName("/api/weather?city=Moscow");
     };
 
     const getWeatherByCoordinates = async (position) => {
         let latCor = position.coords.latitude;
         let lonCor = position.coords.longitude;
-        fetchByCoordinates(apiKey, latCor, lonCor);
+        fetchByCoordinates(`/api/weather/coordinates?lat=${latCor}&lon=${lonCor}`);
     };
 
     const getWeather = () => {
@@ -105,10 +106,11 @@ const mapStateToProps = ({apiKey, defaultWeather, favoritesCities}) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchByCityName: (apiKey, defaultWeather) => dispatch(weatherFetchDataByName(apiKey, defaultWeather)),
+        fetchByCityName: url => dispatch(weatherFetchDataByName(url)),
         fetchByCoordinates: (apiKey, latCor, lonCor) => dispatch(weatherFetchDataByCoordinates(apiKey, latCor, lonCor)),
         fetchFavoriteCityByName: (cityId, apiKey, cityName) => dispatch(fetchFavoriteCity(cityId, apiKey, cityName)),
-        deleteFavoriteCity: (cityId) => dispatch(deleteFavoriteCity(cityId))
+        deleteFavoriteCity: (cityId) => dispatch(deleteFavoriteCity(cityId)),
+        fetchData: url => dispatch(personsFetchData(url))
     };
 };
 

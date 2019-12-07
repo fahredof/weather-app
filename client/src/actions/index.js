@@ -1,35 +1,37 @@
 import { fetchByCity, fetchByCoordinates } from "../utils/fetchWeather";
 import { parseData} from "../utils/parseData";
 
-export const weatherFetchDataByNameSuccess = (payload) => {
+export function weatherFetchDataByNameSuccess(payload) {
     return {
         type: "WEATHER_FETCH_DATA_BY_NAME_SUCCESS",
         payload
     }
 };
 
-export const weatherFetchDataByName = (apiKey, cityName) => {
-    return async function (dispatch) {
-        fetchByCity(apiKey, cityName)
+export function weatherFetchDataByName(url) {
+    return (dispatch) => {
+        fetch(url)
+            .then(data => data.json())
             .then(data => parseData(data))
             .then(response => dispatch(weatherFetchDataByNameSuccess(response)))
     };
-};
+}
 
-export const weatherFetchDataByCoordinatesSuccess = (payload) => {
+export function weatherFetchDataByCoordinatesSuccess(payload) {
     return {
         type: "WEATHER_FETCH_DATA_BY_COORDINATES_SUCCESS",
         payload
     }
-};
+}
 
-export const weatherFetchDataByCoordinates = (apiKey, latCor, lonCor) => {
-    return async function (dispatch) {
-        fetchByCoordinates(apiKey, latCor, lonCor)
+export function weatherFetchDataByCoordinates(url) {
+    return (dispatch) => {
+        fetch(url)
+            .then(data => data.json())
             .then(data => parseData(data))
             .then(response => dispatch(weatherFetchDataByCoordinatesSuccess(response)))
     };
-};
+}
 
 export const fetchFavoriteCitySuccess = (cityId, payload) => {
     return {
@@ -53,3 +55,19 @@ export const deleteFavoriteCity = (cityId) => {
         cityId
     };
 };
+/////////////////////////
+export function personsFetchDataSuccess(persons) {
+    return {
+        type: "PERSONS_FETCH_DATA_SUCCESS",
+        persons
+    }
+}
+
+export function personsFetchData(url) {
+    return (dispatch) => {
+        fetch(url)
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .then(persons => dispatch(personsFetchDataSuccess(persons)))
+    }
+}

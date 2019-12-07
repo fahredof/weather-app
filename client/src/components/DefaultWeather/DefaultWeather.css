@@ -1,0 +1,33 @@
+.def {
+  grid-area: def;
+  font-size: 40px;
+}
+.default {
+  display: grid;
+  grid-template-areas:
+  "ct ct"
+  "img tmp";
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 0.5fr 0.5fr;
+}
+
+.city {
+  grid-area: ct;
+}
+
+.temp {
+  grid-area: tmp;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.image {
+  grid-area: img;
+  display: flex;
+  justify-content: center;
+}
+
+.image img{
+  height: 126px;
+}

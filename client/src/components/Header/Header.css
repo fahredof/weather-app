@@ -1,0 +1,5 @@
+.header {
+    grid-area: all;
+    text-align: left;
+    margin-left: 10px;
+}

@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css?family=Quicksand&display=swap");
+
+.body {
+    font-family: "Quicksand", sans-serif;
+    text-align: center;
+    margin-top: 2px;
+
+    display: grid;
+    grid-template-areas:
+            "all all all"
+            "def det det"
+            "fav1 fav2 fav3";
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 2fr 12fr 12fr;
+    grid-gap: 30px;
+}

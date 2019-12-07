@@ -1,0 +1,40 @@
+#list {
+    width: 87%;
+    display: grid;
+    grid-template-areas:
+            "ct tmp img img crossButton"
+            "ct tmp img img crossButton"
+            "det det det det det"
+            "det det det det det";
+    grid-template-columns: 100px 100px 100px 50px;
+    grid-template-rows: 30px 30px 30px 30px 30px 30px;
+}
+
+.city {
+    grid-area: ct;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 30px;
+}
+
+.temp {
+    grid-area: tmp;
+    font-size: 30px;
+}
+
+.image {
+    grid-area: img;
+}
+
+.sp {
+    grid-area: det;
+    font-size: 1px;
+}
+
+.crossButton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    grid-area: crossButton;
+}

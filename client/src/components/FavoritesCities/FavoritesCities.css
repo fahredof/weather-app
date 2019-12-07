@@ -1,0 +1,21 @@
+.favCity {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 15%;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#city1 {
+  grid-area: fav1;
+}
+
+#city2 {
+  grid-area: fav2;
+}
+
+#city3 {
+  grid-area: fav3;
+}

@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
-//const Schema = mongoose.Schema();
 
 const citySchema = new mongoose.Schema({
-    name: String
+    cities: Object
 });
 
 const City = mongoose.model("citie", citySchema);

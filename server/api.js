@@ -4,7 +4,7 @@ const City = require("./city");
 const fetch = require("node-fetch");
 
 const API_KEY = "f77919380546d1f6ef8015d53089ba0e";
-const defaultCity = "New York";
+const defaultCity = "Ufa";
 
 const fetchByCity = async (api_key, city) => {
     const response =
@@ -32,7 +32,7 @@ const fetchByCoordinates = async (api_key, latitude, longitude) => {
 
 router.get("/weather", (request, response) => {
     let city = request.query.city;
-    console.log("aghahahahahhahahahah");
+
     if (city === undefined) {
         city = defaultCity;
     }
@@ -78,16 +78,21 @@ router.post("/favorites", (req, res) => {
         });
 });
 
-router.delete("/favorites/:id", (req, res) => {
-    City.deleteOne({_id: req.params.id})
-        .then((city) => {
-            res.send(city)
+router.put("/favorites", (req, res) => {
+    let cityKey = req.params.key;
+    let cityName = req.params.city;
+
+    City.find()
+        .select("cities")
+        .populate("cities city")
+        .then((data) => {
+            res.send(data)
         })
         .catch(e => {
             res.send(e);
         })
-});
 
+});
 /*router.put("/muggers/:id", (req, res) => {
    Mugger.findByIdAndUpdate({_id: req.params.id}, req.body)
        .then(() => {
@@ -100,5 +105,15 @@ router.delete("/favorites/:id", (req, res) => {
            res.send(e);
        })
 });*/
+
+router.delete("/favorites/:id", (req, res) => {
+    City.deleteOne({_id: req.params.id})
+        .then((city) => {
+            res.send(city)
+        })
+        .catch(e => {
+            res.send(e);
+        })
+});
 
 module.exports = router;

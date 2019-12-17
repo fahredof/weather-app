@@ -6,7 +6,8 @@ import {
     weatherFetchDataByCoordinates,
     fetchFavoriteCity,
     deleteFavoriteCity,
-    personsFetchData} from "../../actions/index"
+    getCities, postCities
+} from "../../actions/index"
 
 import {getCoordinates} from "../../utils/getCoordinates.js";
 import {saveToLocalStorage} from "../../utils/saveToLocalStorage";
@@ -21,13 +22,15 @@ const App = (props) => {
     const [isLoading, setIsLoading] = useState(true);
 
     const {
-        apiKey, favoritesCities,
+        favoritesCities,
         deleteFavoriteCity, fetchByCityName,
-        fetchByCoordinates, fetchFavoriteCityByName, fetchData
+        fetchByCoordinates, fetchFavoriteCityByName,
+        getCitiesFromDB, postCity
     } = props;
 
     const getDefaultWeather = async () => {
-        fetchByCityName("/api/weather?city=Moscow");
+        fetchByCityName("/api/weather");
+        getCitiesFromDB("/api/favorites")
     };
 
     const getWeatherByCoordinates = async (position) => {
@@ -43,7 +46,7 @@ const App = (props) => {
     getWeather();
 
     const getWeatherByName = async (cityId, cityName) => {
-        fetchFavoriteCityByName(cityId, apiKey, cityName);
+        fetchFavoriteCityByName(`/api/weather?city=${cityName}`, cityId);
     };
 
     const deleteCity = (cityId) => {
@@ -61,6 +64,7 @@ const App = (props) => {
     useEffect(() => {
         if (!isLoading)
             saveToLocalStorage(favoritesCities);
+            postCity(favoritesCities);
     }, [favoritesCities, isLoading]);
 
     useEffect(() => {
@@ -96,10 +100,8 @@ const App = (props) => {
     );
 };
 
-const mapStateToProps = ({apiKey, defaultWeather, favoritesCities}) => {
+const mapStateToProps = ({favoritesCities}) => {
     return {
-        apiKey,
-        defaultWeather,
         favoritesCities
     };
 };
@@ -108,9 +110,10 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchByCityName: url => dispatch(weatherFetchDataByName(url)),
         fetchByCoordinates: (apiKey, latCor, lonCor) => dispatch(weatherFetchDataByCoordinates(apiKey, latCor, lonCor)),
-        fetchFavoriteCityByName: (cityId, apiKey, cityName) => dispatch(fetchFavoriteCity(cityId, apiKey, cityName)),
-        deleteFavoriteCity: (cityId) => dispatch(deleteFavoriteCity(cityId)),
-        fetchData: url => dispatch(personsFetchData(url))
+        fetchFavoriteCityByName: (url, cityId) => dispatch(fetchFavoriteCity(url, cityId)),
+        deleteFavoriteCity: cityId => dispatch(deleteFavoriteCity(cityId)),
+        getCitiesFromDB: url => dispatch(getCities(url)),
+        postCity: (queue) => dispatch (postCities(queue))
     };
 };
 

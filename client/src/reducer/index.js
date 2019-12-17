@@ -2,7 +2,8 @@ const initialState = {
     apiKey: "f77919380546d1f6ef8015d53089ba0e",
     defaultWeather: "New York",
     mainCity: [],
-    favoritesCities: [{}, {}, {}]
+    favoritesCities: [{}, {}, {}],
+    favCities: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -20,6 +21,15 @@ const reducer = (state = initialState, action) => {
                 mainCity: action.payload
             };
 
+        case "GET_CITIES_SUCCESS":
+            return {
+                ...state,
+                favCities: action.payload
+            };
+
+        case "POST_CITIES_SUCCESS":
+            return state;
+
         case "FETCH_FAVORITE_CITY":
             let cities = [...state.favoritesCities];
             cities[action.cityId - 1] = action.payload;
@@ -34,12 +44,6 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 favoritesCities: city
-            };
-
-        case "PERSONS_FETCH_DATA_SUCCESS":
-            return {
-                ...state,
-                mainCity: action.persons
             };
 
         default:

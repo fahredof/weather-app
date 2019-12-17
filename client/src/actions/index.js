@@ -1,12 +1,12 @@
-import { fetchByCity, fetchByCoordinates } from "../utils/fetchWeather";
 import { parseData} from "../utils/parseData";
 
+// Fetch cities
 export function weatherFetchDataByNameSuccess(payload) {
     return {
         type: "WEATHER_FETCH_DATA_BY_NAME_SUCCESS",
         payload
     }
-};
+}
 
 export function weatherFetchDataByName(url) {
     return (dispatch) => {
@@ -33,7 +33,70 @@ export function weatherFetchDataByCoordinates(url) {
     };
 }
 
-export const fetchFavoriteCitySuccess = (cityId, payload) => {
+export function fetchFavoriteCitySuccess(cityId, payload) {
+    return {
+        type: "FETCH_FAVORITE_CITY",
+        cityId,
+        payload
+    };
+}
+
+export function fetchFavoriteCity(url, cityId) {
+    return (dispatch) => {
+        fetch(url)
+            .then(data => data.json())
+            .then(data => parseData(data))
+            .then(response => dispatch(fetchFavoriteCitySuccess(cityId, response)))
+    };
+}
+
+// Work with DataBase
+export function getCitiesSuccess(payload) {
+    return {
+        type: "GET_CITIES_SUCCESS",
+        payload
+    }
+}
+
+export function getCities(url) {
+    return (dispatch) => {
+        fetch(url)
+            .then(data => data.json())
+            //then(data => console.log(data))
+            .then(response => dispatch(getCitiesSuccess(response)))
+    };
+}
+
+export function postCitiesSuccess() {
+    return {
+        type: "POST_CITIES_SUCCESS"
+    }
+}
+
+export function postCities(queue) {
+    let cities = queue.map((data, index) => ({
+        key: index,
+        city: data.city
+    }));
+    return (dispatch) => {
+        fetch('/api/favorites', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({
+                cities: cities,
+                cityId: 0
+            })
+        })
+            .then(dispatch(postCitiesSuccess()))
+            .catch(err => console.log(err))
+    };
+}
+
+
+// OLD
+/*export const fetchFavoriteCitySuccess = (cityId, payload) => {
     return {
         type: "FETCH_FAVORITE_CITY",
         cityId,
@@ -47,7 +110,7 @@ export const fetchFavoriteCity = (cityId, apiKey, cityName) => {
             .then(data => parseData(data))
             .then(response => dispatch(fetchFavoriteCitySuccess(cityId, response)))
     };
-};
+};*/
 
 export const deleteFavoriteCity = (cityId) => {
     return {
@@ -55,6 +118,8 @@ export const deleteFavoriteCity = (cityId) => {
         cityId
     };
 };
+
+
 /////////////////////////
 export function personsFetchDataSuccess(persons) {
     return {

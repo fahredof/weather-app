@@ -1,9 +1,8 @@
 const initialState = {
-    apiKey: "f77919380546d1f6ef8015d53089ba0e",
-    defaultWeather: "New York",
     mainCity: [],
     favoritesCities: [{}, {}, {}],
-    favCities: []
+    favCities: [],
+    idCities: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -22,6 +21,7 @@ const reducer = (state = initialState, action) => {
             };
 
         case "GET_CITIES_SUCCESS":
+            //console.log(action.payload);
             return {
                 ...state,
                 favCities: action.payload
@@ -32,18 +32,36 @@ const reducer = (state = initialState, action) => {
 
         case "FETCH_FAVORITE_CITY":
             let cities = [...state.favoritesCities];
+            console.log(`reducer ${action.cityId}`);
+            console.log(action.payload);
             cities[action.cityId - 1] = action.payload;
             return {
                 ...state,
                 favoritesCities: cities
             };
 
-        case "DELETE_FAVORITE_CITY":
+        case "DELETE_FAVORITE_CITY_SUCCESS":
             let city = [...state.favoritesCities];
-            city[action.cityId] = {};
+            city[action.payload] = {};
             return {
                 ...state,
                 favoritesCities: city
+            };
+
+        case "ADD_TO_QUEUE":
+            let idAdd = [...state.idCities];
+            idAdd[action.index] = action.index;
+            return {
+                ...state,
+                idCities: idAdd
+            };
+
+        case "DELETE_IN_QUEUE":
+            let idDel = [...state.idCities];
+            idDel[action.index] = undefined;
+            return {
+                ...state,
+                idCities: idDel
             };
 
         default:

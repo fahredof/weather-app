@@ -65,55 +65,28 @@ router.get("/favorites", (req, res) => {
         .then((city) => {
             res.send(city);
         })
-        .catch(e => {
-                res.send(e);
+        .catch(error => {
+                res.send(error);
         });
-    //console.log(req.params);
 });
 
 router.post("/favorites", (req, res) => {
     City.create(req.body)
         .then((city) => {
             res.send(city);
+        })
+        .then(console.log(req.body.cities))
+        .catch(error => {
+                res.send(error);
         });
 });
 
-router.put("/favorites", (req, res) => {
-    let cityKey = req.params.key;
-    let cityName = req.params.city;
-
-    City.find()
-        .select("cities")
-        .populate("cities city")
-        .then((data) => {
-            res.send(data)
-        })
-        .catch(e => {
-            res.send(e);
-        })
-
-});
-/*router.put("/muggers/:id", (req, res) => {
-   Mugger.findByIdAndUpdate({_id: req.params.id}, req.body)
-       .then(() => {
-           Mugger.findOne({_id: req.params.id})
-               .then((mugger) => {
-                   res.send(mugger);
-               })
-       })
-       .catch(e => {
-           res.send(e);
-       })
-});*/
-
-router.delete("/favorites/:id", (req, res) => {
-    City.deleteOne({_id: req.params.id})
-        .then((city) => {
-            res.send(city)
-        })
-        .catch(e => {
-            res.send(e);
-        })
+router.delete("/favorites", (req, res) => {
+    let id = req.query.cityId;
+    City.findOneAndDelete({cityId: id})
+        .catch(error => {
+            res.send(error);
+        });
 });
 
 module.exports = router;

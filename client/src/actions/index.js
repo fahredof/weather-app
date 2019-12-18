@@ -43,15 +43,19 @@ export function fetchFavoriteCitySuccess(cityId, payload) {
 
 export function fetchFavoriteCity(url, cityId) {
     return (dispatch) => {
+        console.log(cityId);
+        console.log("fetchFavoriteCity");
         fetch(url)
             .then(data => data.json())
             .then(data => parseData(data))
             .then(response => dispatch(fetchFavoriteCitySuccess(cityId, response)))
+            .catch(error => console.log(error))
     };
 }
 
 // Work with DataBase
 export function getCitiesSuccess(payload) {
+    //console.log(payload);
     return {
         type: "GET_CITIES_SUCCESS",
         payload
@@ -62,10 +66,17 @@ export function getCities(url) {
     return (dispatch) => {
         fetch(url)
             .then(data => data.json())
-            //then(data => console.log(data))
             .then(response => dispatch(getCitiesSuccess(response)))
     };
 }
+/*export function getCities(url) {
+    return (dispatch) => {
+        fetch(url)
+            .then(data => data.json())
+            .then(data => console.log(data))
+            .then( => dispatch(getCitiesSuccess(1)))
+    };
+}*/
 
 export function postCitiesSuccess() {
     return {
@@ -73,66 +84,60 @@ export function postCitiesSuccess() {
     }
 }
 
-export function postCities(queue) {
-    let cities = queue.map((data, index) => ({
-        key: index,
-        city: data.city
-    }));
+export function postCities(cityName, id) {
     return (dispatch) => {
-        fetch('/api/favorites', {
-            method: 'POST',
+        if (cityName !== undefined) {
+            fetch('/api/favorites', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify({
+                    cityId: id,
+                    city: cityName
+                })
+            })
+                .then(dispatch(postCitiesSuccess()))
+                .catch(err => console.log(err));
+        }
+    }
+}
+
+export function deleteFavoriteCitySuccess(payload) {
+    return {
+        type: "DELETE_FAVORITE_CITY_SUCCESS",
+        payload
+    }
+}
+
+export function deleteFavoriteCity(cityId) {
+    return (dispatch) => {
+        fetch(`/api/favorites?cityId=${cityId}`, {
+            method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
-            body: JSON.stringify({
-                cities: cities,
-                cityId: 0
-            })
-        })
-            .then(dispatch(postCitiesSuccess()))
-            .catch(err => console.log(err))
+        });
+        dispatch(deleteFavoriteCitySuccess(cityId));
     };
 }
 
-
-// OLD
-/*export const fetchFavoriteCitySuccess = (cityId, payload) => {
+export const addToQueue = (index) => {
     return {
-        type: "FETCH_FAVORITE_CITY",
-        cityId,
-        payload
-    };
+        type: "ADD_TO_QUEUE",
+        index
+    }
 };
 
-export const fetchFavoriteCity = (cityId, apiKey, cityName) => {
-    return async function (dispatch) {
-        fetchByCity(apiKey, cityName)
-            .then(data => parseData(data))
-            .then(response => dispatch(fetchFavoriteCitySuccess(cityId, response)))
-    };
-};*/
-
-export const deleteFavoriteCity = (cityId) => {
+export const deleteInQueue = (index) => {
+    return {
+        type: "DELETE_IN_QUEUE",
+        index
+    }
+};
+/*export const deleteFavoriteCity = (cityId) => {
     return {
         type: "DELETE_FAVORITE_CITY",
         cityId
     };
-};
-
-
-/////////////////////////
-export function personsFetchDataSuccess(persons) {
-    return {
-        type: "PERSONS_FETCH_DATA_SUCCESS",
-        persons
-    }
-}
-
-export function personsFetchData(url) {
-    return (dispatch) => {
-        fetch(url)
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .then(persons => dispatch(personsFetchDataSuccess(persons)))
-    }
-}
+};*/

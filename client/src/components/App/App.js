@@ -6,7 +6,8 @@ import {
     weatherFetchDataByCoordinates,
     fetchFavoriteCity,
     deleteFavoriteCity,
-    getCities, postCities
+    getCities, postCities,
+    addToQueue, deleteInQueue
 } from "../../actions/index"
 
 import {getCoordinates} from "../../utils/getCoordinates.js";
@@ -22,15 +23,15 @@ const App = (props) => {
     const [isLoading, setIsLoading] = useState(true);
 
     const {
-        favoritesCities,
+        favoritesCities, idCities, favCities,
         deleteFavoriteCity, fetchByCityName,
         fetchByCoordinates, fetchFavoriteCityByName,
-        getCitiesFromDB, postCity
+        getCitiesFromDB, postCity, addToQueue, deleteInQueue
     } = props;
 
     const getDefaultWeather = async () => {
         fetchByCityName("/api/weather");
-        getCitiesFromDB("/api/favorites")
+        //getCitiesFromDB("/api/favorites");
     };
 
     const getWeatherByCoordinates = async (position) => {
@@ -51,6 +52,7 @@ const App = (props) => {
 
     const deleteCity = (cityId) => {
         deleteFavoriteCity(cityId);
+        deleteInQueue(cityId);
     };
 
     const getLocalState = () => {
@@ -61,24 +63,44 @@ const App = (props) => {
         return citiesQueue;
     };
 
+    const getCities = () => {
+        getCitiesFromDB("/api/favorites");
+    };
+
     useEffect(() => {
-        if (!isLoading)
-            saveToLocalStorage(favoritesCities);
-            postCity(favoritesCities);
+        if (setIsLoading) {
+            console.log("first useEffect ");
+            if (favoritesCities !== []) {
+                console.log(favoritesCities);
+                favoritesCities.map((cityName, index) => {
+                    if (cityName.city !== undefined) {
+                        if (idCities[index] === undefined) {
+                            console.log(index);
+                            addToQueue(index);
+                            postCity(cityName.city, index);
+                        }
+                    }
+                });
+            }
+        }
     }, [favoritesCities, isLoading]);
 
     useEffect(() => {
-        if (isLoading) {
-            const ls = getLocalState();
-            if (ls)
-                ls.map((cityName, i) => {
-                    if (cityName) {
-                        getWeatherByName(i + 1, cityName);
-                    }
-                });
+        if (favCities.length < 3 ) {
+            console.log("GSXUHSBQXHBUHXBWHBXHEXHWH");
+            console.log(favCities);
+            favCities.map((cityName) => {
+                console.log(cityName.city);
+                console.log(cityName.cityId);
+                getWeatherByName(cityName.cityId, cityName.city);
+            });
             setIsLoading(false);
         }
-    }, [isLoading]);
+    }, [favCities.length]);
+
+    useEffect(() => {
+        getCitiesFromDB("/api/favorites");
+    }, []);
 
     return (
         <div className="body">
@@ -100,9 +122,11 @@ const App = (props) => {
     );
 };
 
-const mapStateToProps = ({favoritesCities}) => {
+const mapStateToProps = ({favoritesCities, idCities, favCities}) => {
     return {
-        favoritesCities
+        favoritesCities,
+        idCities,
+        favCities
     };
 };
 
@@ -113,7 +137,9 @@ const mapDispatchToProps = (dispatch) => {
         fetchFavoriteCityByName: (url, cityId) => dispatch(fetchFavoriteCity(url, cityId)),
         deleteFavoriteCity: cityId => dispatch(deleteFavoriteCity(cityId)),
         getCitiesFromDB: url => dispatch(getCities(url)),
-        postCity: (queue) => dispatch (postCities(queue))
+        postCity: (queue, id) => dispatch(postCities(queue, id)),
+        addToQueue: (index) => dispatch(addToQueue(index)),
+        deleteInQueue: (index) => dispatch(deleteInQueue(index)),
     };
 };
 

@@ -1,4 +1,4 @@
-import { parseData} from "../utils/parseData";
+import {parseData} from "../utils/parseData";
 
 // Fetch cities
 export function weatherFetchDataByNameSuccess(payload) {
@@ -43,8 +43,6 @@ export function fetchFavoriteCitySuccess(cityId, payload) {
 
 export function fetchFavoriteCity(url, cityId) {
     return (dispatch) => {
-        console.log(cityId);
-        console.log("fetchFavoriteCity");
         fetch(url)
             .then(data => data.json())
             .then(data => parseData(data))
@@ -55,7 +53,6 @@ export function fetchFavoriteCity(url, cityId) {
 
 // Work with DataBase
 export function getCitiesSuccess(payload) {
-    //console.log(payload);
     return {
         type: "GET_CITIES_SUCCESS",
         payload
@@ -69,14 +66,6 @@ export function getCities(url) {
             .then(response => dispatch(getCitiesSuccess(response)))
     };
 }
-/*export function getCities(url) {
-    return (dispatch) => {
-        fetch(url)
-            .then(data => data.json())
-            .then(data => console.log(data))
-            .then( => dispatch(getCitiesSuccess(1)))
-    };
-}*/
 
 export function postCitiesSuccess() {
     return {
@@ -121,23 +110,3 @@ export function deleteFavoriteCity(cityId) {
         dispatch(deleteFavoriteCitySuccess(cityId));
     };
 }
-
-export const addToQueue = (index) => {
-    return {
-        type: "ADD_TO_QUEUE",
-        index
-    }
-};
-
-export const deleteInQueue = (index) => {
-    return {
-        type: "DELETE_IN_QUEUE",
-        index
-    }
-};
-/*export const deleteFavoriteCity = (cityId) => {
-    return {
-        type: "DELETE_FAVORITE_CITY",
-        cityId
-    };
-};*/

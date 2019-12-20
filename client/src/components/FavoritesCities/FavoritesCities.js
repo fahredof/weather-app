@@ -29,7 +29,7 @@ const FavoritesCities = ({id, cityData, getWeather, deleteCity}) => {
     };
 
     const onClickDelete = () => {
-        deleteCity(id - 1);
+        deleteCity(id);
         setCondition(" ");
     };
 

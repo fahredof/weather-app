@@ -8,14 +8,14 @@
   justify-content: center;
 }
 
-#city1 {
+#city0 {
   grid-area: fav1;
 }
 
-#city2 {
+#city1 {
   grid-area: fav2;
 }
 
-#city3 {
+#city2 {
   grid-area: fav3;
 }

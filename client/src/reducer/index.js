@@ -1,8 +1,7 @@
 const initialState = {
     mainCity: [],
     favoritesCities: [{}, {}, {}],
-    favCities: [],
-    idCities: []
+    favCities: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -21,7 +20,6 @@ const reducer = (state = initialState, action) => {
             };
 
         case "GET_CITIES_SUCCESS":
-            //console.log(action.payload);
             return {
                 ...state,
                 favCities: action.payload
@@ -32,9 +30,7 @@ const reducer = (state = initialState, action) => {
 
         case "FETCH_FAVORITE_CITY":
             let cities = [...state.favoritesCities];
-            console.log(`reducer ${action.cityId}`);
-            console.log(action.payload);
-            cities[action.cityId - 1] = action.payload;
+            cities[action.cityId] = action.payload;
             return {
                 ...state,
                 favoritesCities: cities
@@ -46,22 +42,6 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 favoritesCities: city
-            };
-
-        case "ADD_TO_QUEUE":
-            let idAdd = [...state.idCities];
-            idAdd[action.index] = action.index;
-            return {
-                ...state,
-                idCities: idAdd
-            };
-
-        case "DELETE_IN_QUEUE":
-            let idDel = [...state.idCities];
-            idDel[action.index] = undefined;
-            return {
-                ...state,
-                idCities: idDel
             };
 
         default:

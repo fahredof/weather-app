@@ -71,11 +71,17 @@ router.get("/favorites", (req, res) => {
 });
 
 router.post("/favorites", (req, res) => {
+    const id = req.body.cityId;
+    console.log(id);
+    City.findOneAndDelete({cityId: id})
+        .then(City.find({})
+            .then(data => res.send(data))
+        );
+
     City.create(req.body)
         .then((city) => {
             res.send(city);
         })
-        .then(console.log(req.body.cities))
         .catch(error => {
                 res.send(error);
         });

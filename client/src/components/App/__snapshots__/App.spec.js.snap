@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App отображается корректно 1`] = `
+<div
+  className="body"
+>
+  <Header
+    updateGeolocation={[Function]}
+  />
+  <DefaultWeather
+    mainCity={
+      Object {
+        "city": "Ufa",
+        "coordinates": "Coordinates [54.73, 55.95]",
+        "error": "",
+        "humidity": "Humidity 72 %",
+        "image": "http://openweathermap.org/img/wn/04n@2x.png",
+        "overcast": "overcast clouds",
+        "pressure": "Pressure 1010 hpa",
+        "temp": "-11°C",
+        "wind": "Wind 2 m/s",
+      }
+    }
+  />
+  <Connect(DetailWeather)
+    mainCity={
+      Object {
+        "city": "Ufa",
+        "coordinates": "Coordinates [54.73, 55.95]",
+        "error": "",
+        "humidity": "Humidity 72 %",
+        "image": "http://openweathermap.org/img/wn/04n@2x.png",
+        "overcast": "overcast clouds",
+        "pressure": "Pressure 1010 hpa",
+        "temp": "-11°C",
+        "wind": "Wind 2 m/s",
+      }
+    }
+  />
+  <FavoritesCities
+    cityData={Object {}}
+    deleteCity={[Function]}
+    getWeather={[Function]}
+    id={0}
+    key="0"
+  />
+  <FavoritesCities
+    cityData={Object {}}
+    deleteCity={[Function]}
+    getWeather={[Function]}
+    id={1}
+    key="1"
+  />
+  <FavoritesCities
+    cityData={Object {}}
+    deleteCity={[Function]}
+    getWeather={[Function]}
+    id={2}
+    key="2"
+  />
+</div>
+`;

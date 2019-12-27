@@ -17,10 +17,10 @@ import DefaultWeather from "../DefaultWeather";
 import DetailWeather from "../DetailWeather";
 import FavoritesCities from "../FavoritesCities";
 
-const App = (props) => {
+export const App = (props) => {
 
     const {
-        favoritesCities, favCities,
+        favoritesCities, favCities, mainCity,
         deleteFavoriteCity, fetchByCityName,
         fetchByCoordinates, fetchFavoriteCityByName,
         getCitiesFromDB, postCity
@@ -64,7 +64,7 @@ const App = (props) => {
                 }
             });
         }
-    }, [favCities.length]);
+    }, [favCities]);
 
     useEffect(() => {
         favoritesCities.map((cityName, index) => {
@@ -79,8 +79,8 @@ const App = (props) => {
             <Header
                 updateGeolocation={getWeather}
             />
-            <DefaultWeather/>
-            <DetailWeather/>
+            <DefaultWeather mainCity={mainCity}/>
+            <DetailWeather mainCity={mainCity}/>
             {favoritesCities.map((city, cityId) => (
                 <FavoritesCities
                     id={cityId}
@@ -94,8 +94,9 @@ const App = (props) => {
     );
 };
 
-const mapStateToProps = ({favoritesCities, favCities}) => {
+const mapStateToProps = ({favoritesCities, favCities, mainCity}) => {
     return {
+        mainCity,
         favoritesCities,
         favCities
     };

@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Spinner Компонент содержит необходимые классы отображается корректно 1`] = `
+<div
+  className="loader"
+/>
+`;
+
+exports[`Spinner отображается корректно 1`] = `
+<div
+  className="loader"
+/>
+`;

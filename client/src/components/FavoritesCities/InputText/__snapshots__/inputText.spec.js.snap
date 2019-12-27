@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input пустая строка отображается корректно 1`] = `
+<div
+  id="input"
+>
+  <form>
+    <input
+      onChange={[Function]}
+      type="text"
+    />
+    <button
+      onClick={[Function]}
+      type="submit"
+    >
+      Add
+    </button>
+  </form>
+</div>
+`;
+
+exports[`Input строка с названием города отображается корректно 1`] = `
+<div
+  id="input"
+>
+  <form>
+    <input
+      onChange={[Function]}
+      type="text"
+    />
+    <button
+      onClick={[Function]}
+      type="submit"
+    >
+      Add
+    </button>
+  </form>
+</div>
+`;

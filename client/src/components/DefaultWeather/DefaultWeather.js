@@ -24,10 +24,10 @@ const DefaultWeather = (props) => {
     )
 };
 
-const mapStateToProps = ({mainCity}) => {
+/*const mapStateToProps = ({mainCity}) => {
     return {
         mainCity
     };
-};
+};*/
 
-export default connect(mapStateToProps)(DefaultWeather);
+export default DefaultWeather;

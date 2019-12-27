@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header image отображается корректно 1`] = `
+<div
+  className="header"
+>
+  <form
+    onClick={[Function]}
+  >
+    <img
+      alt="icon"
+      src="icon.svg"
+    />
+  </form>
+</div>
+`;

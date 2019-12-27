@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DefaultWeather загрузка отображается корректно 1`] = `
+<div
+  className="def"
+  id="def"
+>
+  <div
+    className="default"
+  >
+    <p
+      className="city"
+    >
+      Ufa
+    </p>
+    <p
+      className="temp"
+    >
+      -11
+    </p>
+    <div
+      className="image"
+    >
+      <img
+        alt=""
+        src="https://openweathermap.org/img/wn/04n@2x.png"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DefaultWeather отображение города отображается корректно 1`] = `
+<div
+  className="def"
+  id="def"
+>
+  <div
+    className="default"
+  >
+    <p
+      className="city"
+    >
+      Ufa
+    </p>
+    <p
+      className="temp"
+    >
+      -11
+    </p>
+    <div
+      className="image"
+    >
+      <img
+        alt=""
+        src="https://openweathermap.org/img/wn/04n@2x.png"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DefaultWeather ошибка при получении города отображается корректно 1`] = `
+<div
+  className="def"
+  id="def"
+>
+  <Spinner />
+</div>
+`;
+
+exports[`DefaultWeather ошибка при получении города ошибка при получении города 1`] = `null`;

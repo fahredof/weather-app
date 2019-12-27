@@ -1,0 +1,131 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DefaultWeather загрузка отображается корректно 1`] = `<Spinner />`;
+
+exports[`DefaultWeather отображение города отображается корректно 1`] = `
+<div
+  id="list"
+>
+  <div
+    className="city"
+  >
+    Ufa
+  </div>
+  <div
+    className="temp"
+  >
+    -11
+  </div>
+  <div
+    className="image"
+  >
+    <img
+      alt=""
+      src="https://openweathermap.org/img/wn/04n@2x.png"
+    />
+  </div>
+  <div
+    className="sp"
+  >
+    <Details
+      mainCity={
+        Object {
+          "city": "Ufa",
+          "error": "",
+          "image": "https://openweathermap.org/img/wn/04n@2x.png",
+          "temp": "-11",
+        }
+      }
+    />
+  </div>
+  <img
+    alt=""
+    src="crossButton.svg"
+  />
+</div>
+`;
+
+exports[`DefaultWeather ошибка при получении города отображается корректно 1`] = `
+<div
+  id="list"
+>
+  <div
+    className="wind"
+  >
+    The server responded with a status of 404
+  </div>
+  <div
+    className="crossButton"
+  >
+    <img
+      alt=""
+      src="crossButton.svg"
+    />
+  </div>
+</div>
+`;
+
+exports[`List of Cities загрузка отображается корректно 1`] = `<Spinner />`;
+
+exports[`List of Cities отображение города отображается корректно 1`] = `
+<div
+  id="list"
+>
+  <div
+    className="city"
+  >
+    Ufa
+  </div>
+  <div
+    className="temp"
+  >
+    -11
+  </div>
+  <div
+    className="image"
+  >
+    <img
+      alt=""
+      src="https://openweathermap.org/img/wn/04n@2x.png"
+    />
+  </div>
+  <div
+    className="sp"
+  >
+    <Details
+      mainCity={
+        Object {
+          "city": "Ufa",
+          "error": "",
+          "image": "https://openweathermap.org/img/wn/04n@2x.png",
+          "temp": "-11",
+        }
+      }
+    />
+  </div>
+  <img
+    alt=""
+    src="crossButton.svg"
+  />
+</div>
+`;
+
+exports[`List of Cities ошибка при получении города отображается корректно 1`] = `
+<div
+  id="list"
+>
+  <div
+    className="wind"
+  >
+    The server responded with a status of 404
+  </div>
+  <div
+    className="crossButton"
+  >
+    <img
+      alt=""
+      src="crossButton.svg"
+    />
+  </div>
+</div>
+`;

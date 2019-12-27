@@ -27,13 +27,13 @@ const ListOfCities = ({cityData, onClickDelete}) => {
                     <img src={crossButton} alt="" onClick={onClickDelete}/>
                 </div>
 
-                : <div id="list">
-                    <div className="wind">{error}</div>
-                    <div className="crossButton">
-                        <img src={crossButton} alt="" onClick={onClickDelete}/>
-                    </div>
+            : <div id="list">
+                <div className="wind">{error}</div>
+                <div className="crossButton">
+                    <img src={crossButton} alt="" onClick={onClickDelete}/>
                 </div>
-            : <Spinner/>
+            </div>
+        : <Spinner/>
     );
 };
 

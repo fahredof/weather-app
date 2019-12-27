@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Details отображение города отображается корректно 1`] = `
+<div
+  className="details"
+>
+  <Details
+    mainCity={
+      Object {
+        "coordinates": "Coordinates [54.73, 55.95]",
+        "humidity": "Humidity 66 %",
+        "overcast": "overcast clouds",
+        "pressure": "Pressure 1011 hpa",
+        "wind": "Wind 3 m/s",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`Details ошибка при получении города отображается корректно 1`] = `
+<div
+  className="details"
+>
+  <Spinner />
+</div>
+`;

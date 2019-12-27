@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import Spinner from "../Spinner";
 import Details from "../Details";
 
-const DetailWeather = (props) => {
+export const DetailWeather = (props) => {
 
   const {mainCity} = props;
   const {wind} = mainCity;

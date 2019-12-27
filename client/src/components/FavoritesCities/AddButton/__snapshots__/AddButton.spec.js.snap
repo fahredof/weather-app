@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Add button image отображается корректно 1`] = `
+<div
+  id="addButton"
+>
+  <img
+    alt="icon"
+    src="addButton.svg"
+  />
+</div>
+`;
